@@ -12,12 +12,11 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 // set the home page route
-app.get('/', function(req, res) {
-
-	// ejs render automatically looks in the views folder
+app.get('/', (req, res) => {
 	console.log('Đang truy cập trang chủ...');
-	res.render('index');
-});
+	res.render('index'); // KHÔNG thêm res.send(), res.end() sau dòng này
+  });
+  
 
 app.listen(port, function() {
 	console.log('Our app is running on http://localhost:' + port);
