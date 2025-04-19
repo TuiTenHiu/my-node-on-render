@@ -1,23 +1,20 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
 
-// set the port of our application
-// process.env.PORT lets the port be set by Heroku
-var port = process.env.PORT || 8080;
-
-// set the view engine to ejs
+// Cấu hình EJS
 app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
 
-// make express look in the public directory for assets (css/js/img)
-app.use(express.static(__dirname + '/public'));
+// Tệp tĩnh (CSS, JS,...)
+app.use(express.static('public'));
 
-// set the home page route
+// Route chính
 app.get('/', (req, res) => {
-	console.log('Đang truy cập trang chủ...');
-	res.render('index'); // KHÔNG thêm res.send(), res.end() sau dòng này
-  });
-  
+  res.render('index', { message: 'Xin chào từ Render + Express + EJS!' });
+});
 
-app.listen(port, function() {
-	console.log('Our app is running on http://localhost:' + port);
+// Khởi động server
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
